@@ -1,411 +1,452 @@
 <!doctype html>
 <html lang="en">
 
-	<head>
-		<meta charset="utf-8">
+<head>
+	<meta charset="utf-8">
 
-		<title>reveal.js - The HTML Presentation Framework</title>
+	<title>Building Mobile APIs with Services at Yelp</title>
 
-		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
-		<meta name="author" content="Hakim El Hattab">
+	<meta name="author" content="Stephan Jaensch">
 
-		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+	<link rel="stylesheet" href="css/reveal.css">
+	<link rel="stylesheet" href="css/theme/night.css" id="theme">
 
-		<!-- Code syntax highlighting -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+	<!-- Code syntax highlighting -->
+	<link rel="stylesheet" href="lib/css/zenburn.css">
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement( 'link' );
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
 
-		<!--[if lt IE 9]>
-		<script src="lib/js/html5shiv.js"></script>
-		<![endif]-->
-	</head>
+	<style type="text/css">
+		img { border: 0 !important; }
+	</style>
+</head>
 
-	<body>
+<body>
 
-		<div class="reveal">
+<div class="reveal">
 
-			<!-- Any section element inside of this container is displayed as a slide -->
-			<div class="slides">
-				<section>
-					<h1>Reveal.js</h1>
-					<h3>The HTML Presentation Framework</h3>
-					<p>
-						<small>Created by <a href="http://hakim.se">Hakim El Hattab</a> / <a href="http://twitter.com/hakimel">@hakimel</a></small>
-					</p>
-				</section>
+	<!-- Any section element inside of this container is displayed as a slide -->
+	<div class="slides">
 
-				<section>
-					<h2>Hello There</h2>
-					<p>
-						reveal.js enables you to create beautiful interactive slide decks using HTML. This presentation will show you examples of what it can do.
-					</p>
-				</section>
 
-				<!-- Example of nested vertical slides -->
-				<section>
-					<section>
-						<h2>Vertical Slides</h2>
-						<p>Slides can be nested inside of each other.</p>
-						<p>Use the <em>Space</em> key to navigate through all slides.</p>
-						<br>
-						<a href="#" class="navigate-down">
-							<img width="178" height="238" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
-						</a>
-					</section>
-					<section>
-						<h2>Basement Level 1</h2>
-						<p>Nested slides are useful for adding additional detail underneath a high level horizontal slide.</p>
-					</section>
-					<section>
-						<h2>Basement Level 2</h2>
-						<p>That's it, time to go back up.</p>
-						<br>
-						<a href="#/2">
-							<img width="178" height="238" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Up arrow" style="transform: rotate(180deg); -webkit-transform: rotate(180deg);">
-						</a>
-					</section>
-				</section>
+		<section data-background="images/title-slide-dark.png">
+			<h3>Building Mobile APIs with Services</h3>
+			<p>
+				<small>by <a href="http://www.sjaensch.org">Stephan Jaensch</a>  - sjaensch@yelp.com</small>
+			</p>
 
-				<section>
-					<h2>Slides</h2>
-					<p>
-						Not a coder? Not a problem. There's a fully-featured visual editor for authoring these, try it out at <a href="http://slides.com" target="_blank">http://slides.com</a>.
-					</p>
-				</section>
+			<aside class="notes">My name is Stephan Jaensch, and I'm going to talk to you about building mobile APIs with services at Yelp</aside>
+		</section>
 
-				<section>
-					<h2>Point of View</h2>
-					<p>
-						Press <strong>ESC</strong> to enter the slide overview.
-					</p>
-					<p>
-						Hold down alt and click on any element to zoom in on it using <a href="http://lab.hakim.se/zoom-js">zoom.js</a>. Alt + click anywhere to zoom back out.
-					</p>
-				</section>
 
-				<section>
-					<h2>Touch Optimized</h2>
-					<p>
-						Presentations look great on touch devices, like mobile phones and tablets. Simply swipe through your slides.
-					</p>
-				</section>
+		<section>
 
-				<section data-markdown>
-					<script type="text/template">
-						## Markdown support
+			<div style="float: left; width: 40%">
+				<h2>What's Yelp?</h2>
 
-						Write content using inline or external Markdown.
-						Instructions and more info available in the [readme](https://github.com/hakimel/reveal.js#markdown).
-
-						```
-						<section data-markdown>
-						  ## Markdown support
-
-						  Write content using inline or external Markdown.
-						  Instructions and more info available in the [readme](https://github.com/hakimel/reveal.js#markdown).
-						</section>
-						```
-					</script>
-				</section>
-
-				<section>
-					<section id="fragments">
-						<h2>Fragments</h2>
-						<p>Hit the next arrow...</p>
-						<p class="fragment">... to step through ...</p>
-						<p><span class="fragment">... a</span> <span class="fragment">fragmented</span> <span class="fragment">slide.</span></p>
-
-						<aside class="notes">
-							This slide has fragments which are also stepped through in the notes window.
-						</aside>
-					</section>
-					<section>
-						<h2>Fragment Styles</h2>
-						<p>There's different types of fragments, like:</p>
-						<p class="fragment grow">grow</p>
-						<p class="fragment shrink">shrink</p>
-						<p class="fragment fade-out">fade-out</p>
-						<p class="fragment current-visible">current-visible</p>
-						<p class="fragment highlight-red">highlight-red</p>
-						<p class="fragment highlight-blue">highlight-blue</p>
-					</section>
-				</section>
-
-				<section id="transitions">
-					<h2>Transition Styles</h2>
-					<p>
-						You can select from different transitions, like: <br>
-						<a href="?transition=none#/transitions">None</a> -
-						<a href="?transition=fade#/transitions">Fade</a> -
-						<a href="?transition=slide#/transitions">Slide</a> -
-						<a href="?transition=convex#/transitions">Convex</a> -
-						<a href="?transition=concave#/transitions">Concave</a> -
-						<a href="?transition=zoom#/transitions">Zoom</a>
-					</p>
-				</section>
-
-				<section id="themes">
-					<h2>Themes</h2>
-					<p>
-						reveal.js comes with a few themes built in: <br>
-						<!-- Hacks to swap themes after the page has loaded. Not flexible and only intended for the reveal.js demo deck. -->
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/black.css'); return false;">Black (default)</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/white.css'); return false;">White</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/league.css'); return false;">League</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/sky.css'); return false;">Sky</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/beige.css'); return false;">Beige</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/simple.css'); return false;">Simple</a> <br>
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/serif.css'); return false;">Serif</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/blood.css'); return false;">Blood</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/night.css'); return false;">Night</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/moon.css'); return false;">Moon</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/solarized.css'); return false;">Solarized</a>
-					</p>
-				</section>
-
-				<section>
-					<section data-background="#dddddd">
-						<h2>Slide Backgrounds</h2>
-						<p>
-							Set <code>data-background="#dddddd"</code> on a slide to change the background color. All CSS color formats are supported.
-						</p>
-						<a href="#" class="navigate-down">
-							<img width="178" height="238" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
-						</a>
-					</section>
-					<section data-background="https://s3.amazonaws.com/hakim-static/reveal-js/image-placeholder.png">
-						<h2>Image Backgrounds</h2>
-						<pre><code>&lt;section data-background="image.png"&gt;</code></pre>
-					</section>
-					<section data-background="https://s3.amazonaws.com/hakim-static/reveal-js/image-placeholder.png" data-background-repeat="repeat" data-background-size="100px">
-						<h2>Tiled Backgrounds</h2>
-						<pre><code style="word-wrap: break-word;">&lt;section data-background="image.png" data-background-repeat="repeat" data-background-size="100px"&gt;</code></pre>
-					</section>
-					<section data-background-video="https://s3.amazonaws.com/static.slid.es/site/homepage/v1/homepage-video-editor.mp4,https://s3.amazonaws.com/static.slid.es/site/homepage/v1/homepage-video-editor.webm" data-background-color="#000000">
-						<div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-							<h2>Video Backgrounds</h2>
-							<pre><code style="word-wrap: break-word;">&lt;section data-background-video="video.mp4,video.webm"&gt;</code></pre>
-						</div>
-					</section>
-					<section data-background="http://i.giphy.com/90F8aUepslB84.gif">
-						<h2>... and GIFs!</h2>
-					</section>
-				</section>
-
-				<section data-transition="slide" data-background="#4d7e65" data-background-transition="zoom">
-					<h2>Background Transitions</h2>
-					<p>
-						Different background transitions are available via the backgroundTransition option. This one's called "zoom".
-					</p>
-					<pre><code>Reveal.configure({ backgroundTransition: 'zoom' })</code></pre>
-				</section>
-
-				<section data-transition="slide" data-background="#b5533c" data-background-transition="zoom">
-					<h2>Background Transitions</h2>
-					<p>
-						You can override background transitions per-slide.
-					</p>
-					<pre><code style="word-wrap: break-word;">&lt;section data-background-transition="zoom"&gt;</code></pre>
-				</section>
-
-				<section>
-					<h2>Pretty Code</h2>
-					<pre><code data-trim contenteditable>
-function linkify( selector ) {
-  if( supports3DTransforms ) {
-
-    var nodes = document.querySelectorAll( selector );
-
-    for( var i = 0, len = nodes.length; i &lt; len; i++ ) {
-      var node = nodes[i];
-
-      if( !node.className ) {
-        node.className += ' roll';
-      }
-    }
-  }
-}
-					</code></pre>
-					<p>Code syntax highlighting courtesy of <a href="http://softwaremaniacs.org/soft/highlight/en/description/">highlight.js</a>.</p>
-				</section>
-
-				<section>
-					<h2>Marvelous List</h2>
-					<ul>
-						<li>No order here</li>
-						<li>Or here</li>
-						<li>Or here</li>
-						<li>Or here</li>
-					</ul>
-				</section>
-
-				<section>
-					<h2>Fantastic Ordered List</h2>
-					<ol>
-						<li>One is smaller than...</li>
-						<li>Two is smaller than...</li>
-						<li>Three!</li>
-					</ol>
-				</section>
-
-				<section>
-					<h2>Tabular Tables</h2>
-					<table>
-						<thead>
-							<tr>
-								<th>Item</th>
-								<th>Value</th>
-								<th>Quantity</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>Apples</td>
-								<td>$1</td>
-								<td>7</td>
-							</tr>
-							<tr>
-								<td>Lemonade</td>
-								<td>$2</td>
-								<td>18</td>
-							</tr>
-							<tr>
-								<td>Bread</td>
-								<td>$3</td>
-								<td>2</td>
-							</tr>
-						</tbody>
-					</table>
-				</section>
-
-				<section>
-					<h2>Clever Quotes</h2>
-					<p>
-						These guys come in two forms, inline: <q cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
-						&ldquo;The nice thing about standards is that there are so many to choose from&rdquo;</q> and block:
-					</p>
-					<blockquote cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
-						&ldquo;For years there has been a theory that millions of monkeys typing at random on millions of typewriters would
-						reproduce the entire works of Shakespeare. The Internet has proven this theory to be untrue.&rdquo;
-					</blockquote>
-				</section>
-
-				<section>
-					<h2>Intergalactic Interconnections</h2>
-					<p>
-						You can link between slides internally,
-						<a href="#/2/3">like this</a>.
-					</p>
-				</section>
-
-				<section>
-					<h2>Speaker View</h2>
-					<p>There's a <a href="https://github.com/hakimel/reveal.js#speaker-notes">speaker view</a>. It includes a timer, preview of the upcoming slide as well as your speaker notes.</p>
-					<p>Press the <em>S</em> key to try it out.</p>
-
-					<aside class="notes">
-						Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
-					</aside>
-				</section>
-
-				<section>
-					<h2>Export to PDF</h2>
-					<p>Presentations can be <a href="https://github.com/hakimel/reveal.js#pdf-export">exported to PDF</a>, here's an example:</p>
-					<iframe src="//www.slideshare.net/slideshow/embed_code/42840540" width="445" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
-				</section>
-
-				<section>
-					<h2>Global State</h2>
-					<p>
-						Set <code>data-state="something"</code> on a slide and <code>"something"</code>
-						will be added as a class to the document element when the slide is open. This lets you
-						apply broader style changes, like switching the page background.
-					</p>
-				</section>
-
-				<section data-state="customevent">
-					<h2>State Events</h2>
-					<p>
-						Additionally custom events can be triggered on a per slide basis by binding to the <code>data-state</code> name.
-					</p>
-					<pre><code class="javascript" data-trim contenteditable style="font-size: 18px;">
-Reveal.addEventListener( 'customevent', function() {
-	console.log( '"customevent" has fired' );
-} );
-					</code></pre>
-				</section>
-
-				<section>
-					<h2>Take a Moment</h2>
-					<p>
-						Press B or . on your keyboard to pause the presentation. This is helpful when you're on stage and want to take distracting slides off the screen.
-					</p>
-				</section>
-
-				<section>
-					<h2>Much more</h2>
-					<ul>
-						<li>Right-to-left support</li>
-						<li><a href="https://github.com/hakimel/reveal.js#api">Extensive JavaScript API</a></li>
-						<li><a href="https://github.com/hakimel/reveal.js#auto-sliding">Auto-progression</a></li>
-						<li><a href="https://github.com/hakimel/reveal.js#parallax-background">Parallax backgrounds</a></li>
-						<li><a href="https://github.com/hakimel/reveal.js#keyboard-bindings">Custom keyboard bindings</a></li>
-					</ul>
-				</section>
-
-				<section style="text-align: left;">
-					<h1>THE END</h1>
-					<p>
-						- <a href="http://slides.com">Try the online editor</a> <br>
-						- <a href="https://github.com/hakimel/reveal.js">Source code &amp; documentation</a>
-					</p>
-				</section>
-
+				<img data-src="images/yelp-consumer-app.png" />
 			</div>
 
-		</div>
+			<img data-src="images/yelp-web.png" style="width: 55%" />
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
+			<ul style="width: 55%">
+				<li>connect people with great local businesses</li>
+				<li class="fragment">website, apps, mobile site</li>
+				<li class="fragment">142 million monthly unique visitors</li>
+				<li class="fragment">77 million reviews</li>
+			</ul>
 
-		<script>
+			<aside class="notes">Available in over 30 countries, most recently launched in the Phillippines &middot; not only for finding great restaurants and bars, but also doctors, shops and any other kind of local business</aside>
+		</section>
 
-			// Full list of configuration options available at:
-			// https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				controls: true,
-				progress: true,
-				history: true,
-				center: true,
 
-				transition: 'slide', // none/fade/slide/convex/concave/zoom
+		<section>
+			<img data-src="images/yelp-bizapp.png" style="width: 40%; float: right" />
 
-				// Optional reveal.js plugins
-				dependencies: [
-					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: 'plugin/zoom-js/zoom.js', async: true },
-					{ src: 'plugin/notes/notes.js', async: true }
-				]
-			});
+			<h2>Yelp for Biz Owners</h2>
 
-		</script>
+			<ul style="width: 55%">
+				<li>measure visitor activity on your page</li>
+				<li>interact with customers</li>
+				<li>upload photos</li>
+			</ul>
 
-	</body>
+			<img data-src="images/yelp-biz-site.png" align="left" style="width: 55%" />
+		</section>
+
+
+		<section>
+			<h2>whoami</h2>
+
+			<p>backend developer for the Biz Owner App</p>
+			<p>worked on the main Yelp app backend before that</p>
+			<p>Python user since 2008</p>
+			<p>did a lot of Django work in the past</p>
+
+		</section>
+
+
+		<section>
+			<img data-src="images/yelp-2004.png" style="float: right; width: 30%; margin-left: 1em;" />
+
+			<h2>Yelp: a brief history lesson</h2>
+
+			<ul style="width: 55%">
+				<li>founded in 2004</li>
+				<li>all code in one central repository (‘yelp-main’)</li>
+			</ul>
+			<ul>
+				<li class="fragment">web, mobile web, mobile backend, business owner site</li>
+				<li class="fragment">a lot of homegrown code</li>
+				<li class="fragment">new abstractions introduced without removing the old ones</li>
+				<li class="fragment">as Yelp grew, this started to become a bottleneck</li>
+			</ul>
+
+			<aside class="notes">at some point we had three different ways to do SQL queries &middot; cannot refactor, people have to ramp up on huge codebase, impossible to know all the code &middot; one area that highlights our issues is the yelp push process</aside>
+
+		</section>
+
+
+		<section>
+			<h2>The Yelp push process</h2>
+
+			<p>Code deployments (“pushes”) are done several times a day</p>
+			<p>Run by a pushmaster, an engineer with production system access</p>
+			<p>People join a push (“pickme”)</p>
+
+			<img data-src="images/pushes.png" />
+
+			<aside class="notes">The screenshot shows a list of pushes in Pushmanager; mine was abandoned because we found a problem after deploying to production, so we had to roll back</aside>
+		</section>
+
+
+		<section>
+			<h2>Running a push</h2>
+			<p>Automatic checks make sure there are no merge conflicts</p>
+			<p>deployment branch is deployed to a stage system</p>
+			<p>after verification, it’s sent to production</p>
+			<p>~2 hour process, with no upper bound</p>
+			<img data-src="images/deploydash.png" style="border: 0" />
+
+			<aside class="notes">Found a problem? Need to take branch out, go back to stage, wait for test suites to finish, analyze results. But the push process is being optimized all the time: less work checking requests, less work deploying.</aside>
+
+		</section>
+
+
+		<section>
+			<img data-src="images/i-have-a-solution.png" />
+
+			<aside class="notes">This doesn’t scale: More people per push means higher likelihood of something going wrong</aside>
+		</section>
+
+
+		<section>
+			<h2>Modularize</h2>
+
+			<p>you can run only so many pushes a day</p>
+			<p class="fragment">so let’s build services!</p>
+		</section>
+
+
+		<section>
+			<h2>Why Services?</h2>
+
+			<p>each service is developed and deployed independently</p>
+			<p>services are usually small, covering only one aspect or set of features</p>
+			<p>easy to parallelize thanks to async HTTP requests, so it might even speed your code up</p>
+
+			<small style="margin-top: 2em">
+				<a>http://bit.do/fowler-service</a><br />
+				<a>http://bit.do/microservices</a><br />
+				<a>https://github.com/Yelp/service-principles</a>
+			</small>
+
+			<aside class="notes">search and ad selection are hard problems, waiting for the slowest of the bunch instead of doing them consecutively is a nice win &middot;
+easy to introduce new technologies</aside>
+
+		</section>
+
+
+		<section>
+			<h2>Why Not Services?</h2>
+			<img data-src="images/cats-eating.gif" style="width: 80%">
+
+			<aside class="notes">Idea stolen from Fred Hatfull, check out his talk on Yelp SOA</aside>
+		</section>
+
+
+		<section>
+			<h2>Why Not Services?</h2>
+
+			<p>consistency is really hard</p>
+			<p>no clear dependency / usage graph</p>
+			<p>need to maintain interfaces “forever”</p>
+			<p>testing one huge, mostly self-contained codebase is easy; how do you test services?</p>
+		</section>
+
+
+		<section>
+			<h2>How to make sure it doesn't break</h2>
+
+			<p>unittests</p>
+			<p class="fragment">...are great, but not enough</p>
+			<p class="fragment">a lot of breakage if interfaces change</p>
+			<p class="fragment">our solution: acceptance tests</p>
+			<p class="fragment">as close to production as possible without using dedicated stage environments</p>
+
+			<aside class="notes">component tests are only slightly better (i.e. mocking at the service edge level) &middot;  no mocks, no stubs</aside>
+		</section>
+
+
+		<section>
+			<h2>Testing SOA at Yelp</h2>
+
+			<p>spin up all components you need, using production code</p>
+			<p>done with docker-compose</p>
+			<p class="fragment">heavyweight: take time to run, setup grows with the number of services you call</p>
+			<!--<p class="fragment">how do I notice if I break another service that’s calling me?</p>-->
+
+			<aside class="notes">currently quite cumbersome to write test data</aside>
+
+		</section>
+
+
+		<section>
+			<h2>Setting up acceptance testing</h2>
+			<pre style="width: 45%; float: left"><code data-trim>
+configs:
+build: acceptance/configs/
+volumes:
+	- "./logs:/tmp/logs"
+
+bizapp:
+build: .
+links:
+	- bizfeed
+	- businessmedia
+	- internalapi
+	- sessionsservice
+	- ruleserv
+volumes_from:
+	- configs
+ports:
+	- 13849
+			</code></pre>
+
+			<pre style="width: 45%; float: right"><code data-trim>
+internalapi:
+image: docker-dev/internalapi-testing
+links:
+	- gearman
+	- memcache
+	- databaseprimary
+	- databaseaux
+	- databasebatch
+	- geocoderservice
+environment:
+	YELP_USE_GEARMAND: True
+			</code></pre>
+
+			<aside class="notes">But we think it's well worth it, gives us a lot of confidence in a change so that we can say yep, this will work</aside>
+		</section>
+
+
+		<section>
+			<h2>The Yelp service stack</h2>
+
+			<p>originally we used tornado; didn’t work well</p>
+			<p class="fragment">now: Pyramid, uWSGI, SQLAlchemy</p>
+			<p class="fragment">HTTP and JSON for communication</p>
+			<p class="fragment">Swagger to specify the API and do the inter-service calls</p>
+		</section>
+
+		<section>
+			<img data-src="images/swagger-ui-biz-media-expanded.png" />
+		</section>
+
+
+		<section>
+			<h2>Swagger</h2>
+
+			<p>does request and response validation</p>
+			<p>data structure and basic type checking of the individual fields</p>
+			<p>works dynamically by reading a service’s spec, no need to generate and update client libraries</p>
+			<aside class="notes">bravado and pyramid-swagger for client- and serverside validation - open source, check it out!</aside>
+
+		</section>
+
+
+		<section>
+			<img data-src="images/biz-app-icon.png" style="float: right" />
+			<h2>The Biz App service</h2>
+
+			<p>a special snowflake since it’s one of the very few services reachable from the outside</p>
+			<p class="fragment">not constrained to one area (like business media)</p>
+			<p class="fragment">no local datastore</p>
+			<p class="fragment">oftentimes just a proxy, calling yelp-main and other services</p>
+		</section>
+
+
+		<section>
+
+			<div style="position: relative">
+				<h2>The Biz App service API</h2>
+				<p>RESTy model</p>
+				<p>one resource per endpoint</p>
+				<p>do multiple calls (to different endpoints) to fetch related resources</p>
+				<p>get concurrency for free (if using async calls)</p>
+				<p>some say a lot of simple calls are easier to scale than fewer complicated ones</p>
+				<img class="fragment" data-src="images/red-circle.png" style="position: absolute; left: 30%; top: 0; background:none; box-shadow:none;" />
+			</div>
+
+		</section>
+
+
+		<section>
+			<h2>The Biz App service API</h2>
+
+			<p>one endpoint per client (app) page</p>
+			<p>for write (POST) endpoints, also send the client the data it needs to display the follow-up page</p>
+			<p>aggregate and enrich data we retrieve from yelp-main and other services</p>
+			<p>a high-level interface that translates to our low-level service APIs</p>
+		</section>
+
+
+		<section>
+			<h2>Developing a mobile app backend</h2>
+
+			<p>mobile apps have releases
+			<p>in our case, they’re synchronized, both in time and in features</p>
+			<p class="fragment">iOS apps need to be reviewed; might take 10+ days</p>
+			<p class="fragment">you probably also want to test before releasing</p>
+			<p class="fragment">meaning: API needs to be done sooner than client implementation</p>
+			<p class="fragment"><em>way</em> sooner than release date</p>
+		</section>
+
+
+		<section>
+			<h2>It's not web development</h2>
+
+			<p>you can’t upgrade apps whenever you upgrade the server</p>
+			<p>actually, some users never upgrade</p>
+			<p>so your APIs need to be backwards compatible - forever</p>
+
+			<img class="fragment" data-src="images/swagger-versions.png" />
+		</section>
+
+
+		<section>
+			<h2>Multi-version API</h2>
+
+			<p>maintaining multiple versions can become costly</p>
+			<p>adding fields is backwards compatible</p>
+
+			<img class="fragment" data-src="images/swagger-add-timezone.png" />
+		</section>
+
+
+		<section>
+			<div style="width: 60%; float: left">
+				<h2>Monitoring</h2>
+
+				<p>number of requests, server errors, task queues, sent push notifications…</p>
+				<p>ElastAlert: it's open source!</p>
+				<p>app crashes: Crashlytics</p>
+				<p>you need an on-call rotation: we use PagerDuty</p>
+			</div>
+
+			<img class="fragment" data-src="images/grapperr.png" style="width: 30%">
+			<img class="fragment" data-src="images/biz-app-graphs.png" style="width: 30%">
+			<img class="fragment" data-src="images/biz-app-gearman.png" style="width: 30%">
+		</section>
+
+
+		<section>
+			<h2>More about services @Yelp</h2>
+
+			<p>&nbsp;</p>
+
+			<p><a>Scott Triglia</a>: Arrested Development - surviving the awkward adolescence of a microservices-based application</p>
+
+			<p>Friday, 11am, <em>Python Anywhere</em> room
+		</section>
+
+
+		<section>
+			<h2>The shameless plugs</h2>
+
+			<p>We’re hiring! Check out <a>yelp.com/careers</a></p>
+
+			<p><em>Interested? Contact me even if you don’t find an open job position that fits you, we’re always looking for talented people!</em></p>
+
+			<p class="fragment"><a>yelp.com/engineering</a> aggregates the blog posts, open source projects and more</p>
+
+			<p class="fragment">follow us on Twitter: @Yelp, @YelpEngineering</p>
+
+		</section>
+
+
+		<section>
+			<h2>Have fun and win prizes</h2>
+
+			<p>The Yelp Dataset Challenge: <a>yelp.com/dataset_challenge</a></p>
+
+			<p>Want to work with data, but have no data lying around?</p>
+
+			<img data-src="images/yelp-dataset-challenge.png" />
+
+			<aside class="notes">old challenge dataset, new one will be launched later this summer. Deadline: end of year</aside>
+		</section>
+
+
+		<section>
+			<h1>THANK YOU</h1>
+			<p><em>questions?</em></p>
+		</section>
+
+	</div>
+
+</div>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.js"></script>
+
+<script>
+
+	// Full list of configuration options available at:
+	// https://github.com/hakimel/reveal.js#configuration
+	Reveal.initialize({
+		controls: true,
+		progress: true,
+		history: true,
+		center: true,
+
+		transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+		// Optional reveal.js plugins
+		dependencies: [
+			{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+			{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+			{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+			{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+			{ src: 'plugin/zoom-js/zoom.js', async: true },
+			{ src: 'plugin/notes/notes.js', async: true }
+		]
+	});
+
+</script>
+
+</body>
 </html>
